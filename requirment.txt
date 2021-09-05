@@ -8,3 +8,4 @@ pyrsistent;python_version>"3.0"
 jsonschema
 protobuf
 requests
+setuptools

@@ -68,7 +68,7 @@ if __name__ == '__main__':
                         help="Schema Registry (http(s)://host[:port]")
     parser.add_argument('-t', dest="topic", default="example_serde_protobuf",
                         help="Topic name")
-    parser.add_argument('-f', dest="filename", default="input/bank_data.csv",
+    parser.add_argument('-f', dest="filename", default="../input/bank_data.csv",
                         help="Topic name")
 
     main(parser.parse_args())
