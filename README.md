@@ -95,6 +95,7 @@ docker-compose -f docker/docker-compose.yml down
  2. Maintained versioned history of all schemas
  3. RESTful interface for storing and retrieving
  4. Serializers that plug into Kafka clients
+ 5. Schema Registry lives outside of and separately from your Kafka brokers and clients
  ```
 
 
