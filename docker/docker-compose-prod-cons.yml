@@ -1,0 +1,10 @@
+---
+version: '2'
+services:
+  kafka-producer:
+    image: kafka-producer:v1.0
+    command: "-b broker1:9092,broker2:9093,broker3:9094 -s http://schema-registry:8081 -t assignment"
+
+  kafka-consumer:
+    image: kafka-consumer:v1.0
+    command: "-b broker1:9092,broker2:9093,broker3:9094 -s http://schema-registry:8081 -t assignment"
