@@ -1,6 +1,6 @@
 #### Project Overview
 [![Build Status](https://jenkins.datasparkanalytics.com/buildStatus/icon?job=DS_algo)](https://jenkins.datasparkanalytics.com/job/DS_algo)
-
+```
 Create an application that acts as a Kafka producer and sends ‘transaction’ events using the schema below:
 transaction: {
 transaction_id: string,
@@ -14,11 +14,12 @@ Write a second application that acts as a Kafka consumer to subscribe to the top
 scala, you can choose which language you want for each component
 * Package the two different applications in docker containers and orchestrate the
 container deployments using either docker-compose or a local kubernetes cluster
+```
 
 ![image](https://user-images.githubusercontent.com/37093793/132120383-a2b985c4-14d5-4688-9760-2b2222ecb6b4.png)
 
 #### Dependencies
-
+```
 * Python IDE
 Kindly refer the link for the installation of PyCharm CE link   https://www.jetbrains.com/pycharm/download/other.html .
 In case prefer to use the existing IDE- Kindly make sure the supporting version for python >3.7
@@ -34,21 +35,29 @@ PROTOC_ZIP=protoc-3.14.0-osx-x86_64.zip curl -OL https://github.com/protocolbuff
    rm -f $PROTOC_ZIP
 
  Can always use the below script to generate/update the message template script:     protoc -I=$SRC_DIR –python out=$DST_DIR $SRC_DIR/<MessageSchema>.proto 
-* Docker set up & installation 
+* Docker set up & installation
+```
 
 #### Application Requirement Set up 
+``` 
 Pip install -r requirement.txt
+``` 
 
 #### Start the Kafka Cluster
+```
 docker-compose -f docker/docker-compose.yml up -d
+```
 
 #### BUILD IMAGE:
+ ```
 sudo docker build -t {IMAGE}:{TAG} --target consumer/producer . -f docker/Dockerfile
 
 e.g. docker build -t kafka-producer:v1.0 --target producer . -f docker/Dockerfile
 e.g. docker build -t kafka-consumer:v1.0 --target consumer . -f docker/Dockerfile
+```
 
 #### How to run Producer & Consumer
+USING docker
 ```
 PRODUCER:
 docker run --network docker_default --name producer kafka-producer:v1.0 -b <BrokerName> -s <SchemaRegistry> -t <TopicName> -i <optional: InputFilename>
