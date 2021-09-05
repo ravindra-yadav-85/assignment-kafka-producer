@@ -63,8 +63,16 @@ Eg: docker run --network docker_default --name consumer kafka-consumer:v1.0 -b b
 docker-compose -f docker/docker-compose.yml down
 
 #### Tradeoffs compared to alternative solutions
+ Schema Registry Vs Custom SerDer
+ 1. Support Schema evolution
+ 2. 
 
 
 #### Potential Improvements
+ 1. Producing the messages from actual source
+ 2. Setup the required partitions and Creating multiple consumers to achive the throughput
+ 3. Store the aggregated o/p in datastore
+ 4. Multiple zookeeper setup for HA
+ 5. Multiple replication of messages
 
 
