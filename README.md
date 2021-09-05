@@ -43,6 +43,3 @@ Eg: docker run --network docker_default --name consumer kafka-consumer:v1.0 -b b
 
 #### Stop the Kafka Cluster
 docker-compose -f docker/docker-compose.yml down
-
-
-![image](https://user-images.githubusercontent.com/37093793/132119987-134cf998-2c6b-484c-8ded-f95bb77d95a2.png)
