@@ -3,3 +3,4 @@ six
 protobuf
 requests
 setuptools
+urllib3
