@@ -1,6 +1,6 @@
 #### Project Overview
 [![Build Status](https://jenkins.datasparkanalytics.com/buildStatus/icon?job=DS_algo)](https://jenkins.datasparkanalytics.com/job/DS_algo)
-```
+
 Create an application that acts as a Kafka producer and sends ‘transaction’ events using the schema below:
 transaction: {
 transaction_id: string,
@@ -14,7 +14,6 @@ Write a second application that acts as a Kafka consumer to subscribe to the top
 scala, you can choose which language you want for each component
 * Package the two different applications in docker containers and orchestrate the
 container deployments using either docker-compose or a local kubernetes cluster
-```
 
 ![image](https://user-images.githubusercontent.com/37093793/132120383-a2b985c4-14d5-4688-9760-2b2222ecb6b4.png)
 
