@@ -42,7 +42,7 @@ def main(args):
                     account_dict[transaction.account_number] = addition
                 else:
                     account_dict[transaction.account_number] = transaction.amount
-                print("Account : {} has sum of Amount : {} \n" .format(transaction.account_number, account_dict[transaction.account_number]))
+                print("Account number: {} have sum of :{} amount\n" .format(transaction.account_number, account_dict[transaction.account_number]))
 
         except KeyboardInterrupt:
             break
