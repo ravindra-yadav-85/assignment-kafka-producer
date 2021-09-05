@@ -49,7 +49,7 @@ e.g. docker build -t kafka-producer:v1.0 --target producer . -f docker/Dockerfil
 e.g. docker build -t kafka-consumer:v1.0 --target consumer . -f docker/Dockerfile
 
 #### How to run Producer & Consumer
-
+```
 PRODUCER:
 docker run --network docker_default --name producer kafka-producer:v1.0 -b <BrokerName> -s <SchemaRegistry> -t <TopicName> -i <optional: InputFilename>
 
@@ -60,32 +60,43 @@ CONSUMER:
 docker run --network docker_default --name producer kafka-producer:v1.0 -b <BrokerName> -s <SchemaRegistry> -t <TopicName> -g <>groupName>
 
 Eg: docker run --network docker_default --name consumer kafka-consumer:v1.0 -b broker:9092 -s http://schema-registry:8081 -t assignment -g customerGroup
-
+```
+ 
 USING docker-compose:
-    
+```    
 1. Run the docker compose file [do not forgot to update the {IMAGE}:{TAG}]
+ 
  docker-compose -f docker/docker-compose-prod-cons.yml up -d
 
 2. Follow the logs the see the messages consumed by consumer 
+ 
  docker-compose -f docker/docker-compose-prod-cons.yml logs --f
 
 3. Stop the producer and consumer process 
+ 
  docker-compose -f docker/docker-compose-prod-cons.yml down
 
 #### Stop the Kafka Cluster
 docker-compose -f docker/docker-compose.yml down
+``` 
 
 #### Tradeoffs compared to alternative solutions
+ ```
  Schema Registry Vs Custom SerDer
  1. Support Schema evolution
- 2. 
+ 2. Maintained versioned history of all schemas
+ 3. RESTful interface for storing and retrieving
+ 4. Serializers that plug into Kafka clients
+ ```
 
 
 #### Potential Improvements
+ ```
  1. Producing the messages from actual source
- 2. Setup the required partitions and Creating multiple consumers to achive the throughput
+ 2. Setup the required partitions and creating multiple consumers to achive the throughput
  3. Store the aggregated o/p in datastore
  4. Multiple zookeeper setup for HA
  5. Multiple replication of messages
+ ```
 
 
