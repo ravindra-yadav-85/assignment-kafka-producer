@@ -1,26 +1,16 @@
-#!/usr/bin/env python
-#
-# This is a simple example of the SerializingProducer using protobuf.
-#
-# To regenerate Protobuf classes you must first install the protobuf
-# compiler. Once installed you may call protoc directly or use make.
-#
-# See the protocol buffer docs for instructions on installing and using protoc.
-# https://developers.google.com/protocol-buffers/docs/pythontutorial
-#
 import argparse
-
 # Protobuf generated class; resides at ./user_pb2.py
-import user_pb2
+from proto import transaction_pb2
 from confluent_kafka import DeserializingConsumer
 from confluent_kafka.schema_registry.protobuf import ProtobufDeserializer
 from confluent_kafka.serialization import StringDeserializer
+from collections import defaultdict
 
 
 def main(args):
     topic = args.topic
 
-    protobuf_deserializer = ProtobufDeserializer(user_pb2.User)
+    protobuf_deserializer = ProtobufDeserializer(transaction_pb2.Transaction)
     string_deserializer = StringDeserializer('utf_8')
 
     consumer_conf = {'bootstrap.servers': args.bootstrap_servers,
@@ -31,22 +21,29 @@ def main(args):
 
     consumer = DeserializingConsumer(consumer_conf)
     consumer.subscribe([topic])
+    account_dict = defaultdict(float)
 
     while True:
         try:
             # SIGINT can't be handled when polling, limit timeout to 1 second.
             msg = consumer.poll(1.0)
+            # print(msg)
             if msg is None:
                 continue
 
-            user = msg.value()
-            if user is not None:
-                print("User record {}: name: {}\n"
-                      "\tfavorite_number: {}\n"
-                      "\tfavorite_color: {}\n"
-                      .format(msg.key(), user.name,
-                              user.favorite_color,
-                              user.favorite_number))
+            transaction = msg.value()
+            if transaction is not None:
+                # print("transaction record {}: account no: {}\n"
+                #       "\tamount: {}\n"
+                #       .format(msg.key(), transaction.account_number,
+                #               transaction.amount))
+                if transaction.account_number in account_dict:
+                    addition = account_dict[transaction.account_number] + transaction.amount
+                    account_dict[transaction.account_number] = addition
+                else:
+                    account_dict[transaction.account_number] = transaction.amount
+                print("Account : {} has sum of Amount : {} \n" .format(transaction.account_number, account_dict[transaction.account_number]))
+
         except KeyboardInterrupt:
             break
 
