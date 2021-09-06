@@ -59,7 +59,7 @@ e.g. docker build -t kafka-consumer:v1.0 --target consumer . -f docker/Dockerfil
 USING docker
 ```
 PRODUCER:
-docker run --network docker_default --name producer kafka-producer:v1.0 -b <BrokerName> -s <SchemaRegistry> -t <TopicName> -i <optional: InputFilename>
+docker run --network docker_default --name producer kafka-producer:v1.0 -b <BrokerName> -s <SchemaRegistry> -t <TopicName> -f <optional: InputFileName>
 
 Eg: docker run --network docker_default --name producer kafka-producer:v1.0 -b broker:9092 -s http://schema-registry:8081-t assignment
 
